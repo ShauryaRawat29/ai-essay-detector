@@ -6,23 +6,9 @@ GPT-2 Medium is used **only as an instrument** to produce measurable signals (pe
 
 ---
 
-## Status: FULLY WORKING END-TO-END ✅
-
-| Component | Status | Version |
-|-----------|--------|---------|
-| Human dataset (v0.1.0) | 6,039 essays collected & split | v0.1.0 |
-| Human baselines | 480 train essays, 40 features/bucket | f0.3.0 |
-| Feature registry | Deterministic stylometric + syntax + LM signals | f0.3.0 |
-| LM instrument | gpt2-medium (pinned rev `6dcaa7a`), full-context causal scoring | 0.1.0 |
-| Evidence pipeline | z-score vs baselines, per-sentence + passage signals | — |
-| API `/api/v1/analyze` | Returns `AnalysisResult` with evidence, limitations | — |
-| Frontend (Next.js 16) | Evidence-first UI with sentence highlighting | — |
-| **All tests** | **200+ passing** | — |
-| **Lint (ruff)** | **Clean** | — |
-| **Types (mypy)** | **Clean** | — |
-
-### What you get
 Paste an admissions essay → get **sentence-level evidence** showing which measured features deviate from human baselines, with honest limitations. No "AI probability" — only measurable signals.
+
+The evidence pipeline is live end-to-end: feature extraction (`f0.3.0`), human baselines (`v0.1.0`), `/api/v1/analyze`, and the frontend are all implemented and tested (200+ tests, ruff + mypy clean). The classifier and AI-generated training set are later phases.
 
 ---
 
@@ -154,53 +140,63 @@ The evidence-first interface shows:
 
 ---
 
-**How to add your screenshots:**
-<img width="623" height="205" alt="image" src="https://github.com/user-attachments/assets/42408f87-d605-441c-b9d8-50d78bd34c96" />
+**How to add your screenshots** — the folder `docs/screenshots/` already exists:
 
-1. Take screenshots of the running app (`http://localhost:3000`).
-2. Create the folder `docs/screenshots/` and save them as `home.png`, `results.png`,
-   `sentence-detail.png`, `limitations.png`.
-3. If your filenames differ, just edit the `![](...)` links above.
+1. Run the app: backend (`uvicorn app.main:app`) + frontend (`npm run dev`), open `http://localhost:3000`.
+2. Capture each screen (Windows: `Win + Shift + S`, then save).
+3. Save into `docs/screenshots/` with the exact names below:
+   ```
+   docs/screenshots/home.png
+   docs/screenshots/results.png
+   docs/screenshots/sentence-detail.png
+   docs/screenshots/limitations.png
+   ```
+4. Commit and push:
+   ```bash
+   git add docs/screenshots/*.png
+   git commit -m "docs: add working screenshots"
+   git push origin main
+   ```
+
+> If your files have different names, just edit the `![](...)` links above to match.
+> Preview before pushing: open the repo on GitHub (or use a local Markdown preview) to confirm each image renders.
+
+<img width="623" height="205" alt="image" src="https://github.com/user-attachments/assets/42408f87-d605-441c-b9d8-50d78bd34c96" />
 
 ---
 
 ## Architecture Overview
 
+```mermaid
+flowchart TD
+    FE["Frontend (Next.js)"] -->|POST /api/v1/analyze| API["Backend (FastAPI)"]
+
+    subgraph Pipeline ["Detection Pipeline (Python)"]
+        SPLIT["Sentence Splitter"]
+        FEAT["Feature Extraction (f0.3.0)<br/>Stylometric + Syntax + LM signals"]
+        LM["LM Instrument<br/>gpt2-medium @ pinned rev"]
+        BASELINE["Human Baselines<br/>baselines_f0.3.0.json<br/>(480 train essays)"]
+        SCORE["Evidence Scoring<br/>z-score vs baselines"]
+        RESULT["AnalysisResult<br/>sentences + passages + limitations"]
+    end
+
+    API --> SPLIT
+    SPLIT --> FEAT
+    LM --> FEAT
+    FEAT --> BASELINE
+    BASELINE --> SCORE
+    FEAT --> SCORE
+    SCORE --> RESULT
+    RESULT --> API
+    API -->|"AnalysisResult (evidence, no verdict)"| FE
+
+    classDef product fill:#eef2ff,stroke:#6366f1,color:#312e81;
+    classDef pipe fill:#ecfeff,stroke:#06b6d4,color:#164e63;
+    class FE,API product;
+    class SPLIT,FEAT,LM,BASELINE,SCORE,RESULT pipe;
 ```
-┌─────────────┐     ┌──────────────┐     ┌────────────────────┐
-│  Frontend   │────▶│   Backend    │────▶│  Detection Pipeline │
-│  (Next.js)  │     │  (FastAPI)   │     │  (Python)           │
-└─────────────┘     └──────────────┘     └────────────────────┘
-                           │
-                    ┌──────┴──────┐
-                    ▼             ▼
-             ┌────────────┐ ┌──────────────┐
-             │ Feature    │ │ LM Instrument │
-             │ Registry   │ │ (gpt2-medium) │
-             │ f0.3.0     │ │ pinned rev    │
-             └────────────┘ └──────────────┘
-                    │             │
-                    ▼             ▼
-             ┌──────────────────────────┐
-             │ Baselines Artifact       │
-             │ baselines_f0.3.0.json    │
-             │ (480 human essays)       │
-             └──────────────────────────┘
-                    │
-                    ▼
-             ┌────────────────────┐
-             │ Evidence Scoring   │
-             │ (z-score vs baselines)│
-             └────────────────────┘
-                    │
-                    ▼
-             ┌────────────────────┐
-             │ AnalysisResult     │
-             │ (sentences,        │
-             │  passages,         │
-             │  limitations)      │
-             └────────────────────┘
-```
+
+*Rendered as an image by GitHub. To regenerate it, view this file in the GitHub web UI or a Mermaid-enabled editor (mermaid.live).*
 
 ### Key Principles (from `AGENTS.md`)
 1. **Evidence Over Verdicts** — Never present AI authorship as proven fact

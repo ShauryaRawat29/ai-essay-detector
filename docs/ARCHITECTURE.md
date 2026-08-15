@@ -2,44 +2,28 @@
 
 ## System Architecture
 
-```
-┌─────────────────┐     ┌──────────────────┐     ┌─────────────────┐
-│   Frontend      │     │    Backend       │     │  ML/NLP Stack   │
-│  (Next.js 16)   │────▶│   (FastAPI)      │────▶│  (Python)       │
-└─────────────────┘     └──────────────────┘     └─────────────────┘
-                                │
-                                ▼
-                      ┌──────────────────┐
-                      │ Detection Pipeline│
-                      │  (Orchestration)  │
-                      └──────────────────┘
-                                │
-                ┌───────────────┼───────────────┐
-                ▼               ▼               ▼
-         ┌────────────┐ ┌────────────┐ ┌────────────┐
-         │ Sentence   │ │ Feature    │ │  LM        │
-         │ Splitter   │ │ Extraction │ │ Instrument │
-         └────────────┘ └────────────┘ └────────────┘
-                              │               │
-                       ┌──────┴──────┐  ┌──────┴──────┐
-                       ▼             ▼  ▼             ▼
-                ┌───────────┐ ┌──────────┐ ┌──────────┐
-                │ Stylometric│ │ Syntax   │ │ LM Signals│
-                │ Features   │ │ Features │ │(GPT-2 Med)│
-                └───────────┘ └──────────┘ └──────────┘
-                              │               │
-                       ┌──────┴───────────────┴──────┐
-                       ▼                             ▼
-                ┌─────────────────┐         ┌─────────────────┐
-                │ Baselines       │         │ Evidence        │
-                │ (ADR-004)       │         │ Scoring         │
-                └─────────────────┘         └─────────────────┘
-                       │                             │
-                       ▼                             ▼
-                ┌──────────────────────────────────────────────┐
-                │ AnalysisResult: sentences, passages,         │
-                │ limitations, feature_version, model_version  │
-                └──────────────────────────────────────────────┘
+```mermaid
+flowchart TD
+    FE["Frontend (Next.js 16)"] -->|POST /api/v1/analyze| API["Backend (FastAPI)"]
+
+    subgraph Pipeline ["Detection Pipeline"]
+        SPLIT["Sentence Splitter"]
+        FEAT["Feature Extraction (f0.3.0)<br/>Stylometric + Syntax + LM signals"]
+        LM["LM Instrument<br/>gpt2-medium @ pinned rev"]
+        BASELINE["Human Baselines (ADR-004)<br/>baselines_f0.3.0.json"]
+        SCORE["Evidence Scoring<br/>z-score vs baselines"]
+        RESULT["AnalysisResult<br/>sentences + passages + limitations"]
+    end
+
+    API --> SPLIT
+    SPLIT --> FEAT
+    LM --> FEAT
+    FEAT --> BASELINE
+    BASELINE --> SCORE
+    FEAT --> SCORE
+    SCORE --> RESULT
+    RESULT --> API
+    API -->|"evidence (no verdict)"| FE
 ```
 
 ## Data Flow
