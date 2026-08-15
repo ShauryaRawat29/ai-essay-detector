@@ -126,7 +126,8 @@ The evidence-first interface shows:
 
 
 #### 1. Home page — essay input
-<img width="2548" height="1457" alt="Screenshot 2026-08-15 233803" src="https://github.com/user-attachments/assets/b2ac2035-6c4c-4554-a069-1104111218fd" />
+<img width="2559" height="1471" alt="image" src="https://github.com/user-attachments/assets/11993a2a-b67c-4dd1-9775-215b940032aa" />
+
 
 <img width="2558" height="1464" alt="Screenshot 2026-08-15 234039" src="https://github.com/user-attachments/assets/5bed279f-1974-42c6-96a0-80ab155e2ed3" />
 
