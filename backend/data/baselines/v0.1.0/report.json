@@ -1,0 +1,51 @@
+{
+  "baseline_max_essays": 500,
+  "baseline_sample_seed": 42,
+  "baseline_sample_size": 500,
+  "bucket_essay_counts": {
+    "long": 33,
+    "short": 19,
+    "standard": 428,
+    "xlong": 0
+  },
+  "bucket_sentence_counts": {
+    "long": 1005,
+    "short": 188,
+    "standard": 7624,
+    "xlong": 0
+  },
+  "dataset_version": "v0.1.0",
+  "essays_zero_sentences_skipped": 0,
+  "excluded_long_document_ids": [
+    "viorra-0100",
+    "gb-human-0156",
+    "gb-human-0253",
+    "gb-human-0935",
+    "gb-human-0421",
+    "gb-human-0330",
+    "gb-human-0060",
+    "gb-human-0088",
+    "gb-human-0161",
+    "gb-human-0834",
+    "gb-human-0229",
+    "gb-human-0879",
+    "gb-human-0300",
+    "gb-human-0730",
+    "gb-human-0073",
+    "gb-human-0349",
+    "gb-human-0813",
+    "gb-human-0029",
+    "gb-human-0111",
+    "gb-human-0034"
+  ],
+  "excluded_long_documents": 20,
+  "excluded_non_human": 0,
+  "excluded_non_train": 1809,
+  "feature_version": "f0.3.0",
+  "merge_log": [],
+  "min_n": 30,
+  "records_seen": 6039,
+  "sentences": 8817,
+  "train_human_total": 4230,
+  "train_human_used": 480
+}

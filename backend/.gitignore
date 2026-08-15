@@ -1,0 +1,59 @@
+# Backend .gitignore for AI Essay Detector
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.coverage
+*.sqlite
+*.db
+
+# Virtual environment
+.venv/
+venv/
+env/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Model artifacts (not committed)
+models/
+*.bin
+*.safetensors
+*.pt
+*.pth
+*.onnx
+
+# Data (not committed unless explicitly versioned)
+data/raw/
+data/processed/
+data/splits/
+data/cache/
+*.parquet
+*.arrow
+
+# Logs
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary
+*.tmp
+*.temp
+
+# Distribution
+dist/
+build/
+*.egg-info/

@@ -1,0 +1,58 @@
+# Root .gitignore for AI Essay Detector
+
+# Frontend
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/build/
+frontend/*.log
+frontend/.env*
+!frontend/.env.example
+frontend/.vercel
+frontend/*.tsbuildinfo
+frontend/next-env.d.ts
+
+# Backend
+backend/.venv/
+backend/__pycache__/
+backend/*.pyc
+backend/.env
+backend/models/
+backend/data/raw/
+backend/data/processed/
+backend/*.log
+backend/.pytest_cache/
+backend/.coverage
+backend/*.sqlite
+backend/*.bin
+backend/*.safetensors
+
+# Model caches
+~/.cache/huggingface/
+*.bin
+*.safetensors
+
+# Secrets and keys
+.env
+*.pem
+*.key
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+
+# Generated large datasets (unless explicitly versioned)
+*.parquet
+*.arrow
+data/large/

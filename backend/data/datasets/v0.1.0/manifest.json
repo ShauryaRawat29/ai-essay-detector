@@ -1,0 +1,29 @@
+{
+  "created_at": "2026-08-15T14:48:40.012433+00:00",
+  "files": [
+    "records.jsonl",
+    "manifest.json"
+  ],
+  "holdout_models": [],
+  "input_records": 6039,
+  "label_counts": {
+    "human": 6039
+  },
+  "preprocessing": [
+    "collapse_hspace",
+    "newline_normalize",
+    "nfc_normalize",
+    "strip"
+  ],
+  "removed_duplicates": 0,
+  "seed": 42,
+  "split_counts": {
+    "test": 904,
+    "train": 4230,
+    "val": 905
+  },
+  "total_records": 6039,
+  "train_ratio": 0.7,
+  "val_ratio": 0.15,
+  "version": "v0.1.0"
+}
