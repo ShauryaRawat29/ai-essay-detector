@@ -124,44 +124,29 @@ The evidence-first interface shows:
 
 ### Screenshots
 
-> **📸 PASTE YOUR SCREENSHOTS HERE** — put image files in `docs/screenshots/` and replace the placeholder filenames below.
 
 #### 1. Home page — essay input
-![Home — essay input](docs/screenshots/home.png)
+<img width="2548" height="1457" alt="Screenshot 2026-08-15 233803" src="https://github.com/user-attachments/assets/b2ac2035-6c4c-4554-a069-1104111218fd" />
+
+<img width="2558" height="1464" alt="Screenshot 2026-08-15 234039" src="https://github.com/user-attachments/assets/5bed279f-1974-42c6-96a0-80ab155e2ed3" />
+
 
 #### 2. Analysis results — summary + sentence highlights
-![Results — summary and sentence highlights](docs/screenshots/results.png)
+<img width="1376" height="374" alt="Screenshot 2026-08-15 233840" src="https://github.com/user-attachments/assets/c981a3f0-8775-423f-a915-53f26296dcb9" />
+
 
 #### 3. Expanded sentence — signal table (feature, measured value, baseline, z-score)
-![Sentence detail — signal table](docs/screenshots/sentence-detail.png)
+<img width="1381" height="1218" alt="Screenshot 2026-08-15 233855" src="https://github.com/user-attachments/assets/aeaf6807-4058-4588-ac7a-8bfabb2ceef6" />
+<img width="1604" height="1339" alt="Screenshot 2026-08-15 233920" src="https://github.com/user-attachments/assets/678e84b3-349d-4a18-87f7-97bad7f06ec5" />
+
 
 #### 4. Limitations notice
-![Limitations](docs/screenshots/limitations.png)
+<img width="1593" height="1032" alt="Screenshot 2026-08-15 233946" src="https://github.com/user-attachments/assets/97062317-820a-4e0d-8f66-5e18d6ad5baa" />
+
 
 ---
 
-**How to add your screenshots** — the folder `docs/screenshots/` already exists:
 
-1. Run the app: backend (`uvicorn app.main:app`) + frontend (`npm run dev`), open `http://localhost:3000`.
-2. Capture each screen (Windows: `Win + Shift + S`, then save).
-3. Save into `docs/screenshots/` with the exact names below:
-   ```
-   docs/screenshots/home.png
-   docs/screenshots/results.png
-   docs/screenshots/sentence-detail.png
-   docs/screenshots/limitations.png
-   ```
-4. Commit and push:
-   ```bash
-   git add docs/screenshots/*.png
-   git commit -m "docs: add working screenshots"
-   git push origin main
-   ```
-
-> If your files have different names, just edit the `![](...)` links above to match.
-> Preview before pushing: open the repo on GitHub (or use a local Markdown preview) to confirm each image renders.
-
-<img width="623" height="205" alt="image" src="https://github.com/user-attachments/assets/42408f87-d605-441c-b9d8-50d78bd34c96" />
 
 ---
 
