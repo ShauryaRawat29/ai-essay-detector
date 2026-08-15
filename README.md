@@ -155,6 +155,8 @@ The evidence-first interface shows:
 ---
 
 **How to add your screenshots:**
+<img width="623" height="205" alt="image" src="https://github.com/user-attachments/assets/42408f87-d605-441c-b9d8-50d78bd34c96" />
+
 1. Take screenshots of the running app (`http://localhost:3000`).
 2. Create the folder `docs/screenshots/` and save them as `home.png`, `results.png`,
    `sentence-detail.png`, `limitations.png`.
